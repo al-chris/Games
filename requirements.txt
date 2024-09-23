@@ -1,0 +1,9 @@
+requests
+fastapi 
+uvicorn 
+sqlalchemy 
+passlib[bcrypt]
+bcrypt 
+python-multipart
+python-jose
+alembic
