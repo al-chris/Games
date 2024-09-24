@@ -354,7 +354,7 @@ def get_completion_state(session_id: str = Query(..., description="ID of the ses
     }
 
 @app.post("/completion_step", tags=["Games"])
-def completion_step(session_id: str = Query(..., description="ID of the session"), content: str = Query(..., min_length=1, description="Content of the contribution"), current_user: models.User = Depends(get_current_active_user), db: Session = Depends(get_db)):
+def completion_step(session_id: str = Body(...), content: str = Body(...), current_user: models.User = Depends(get_current_active_user), db: Session = Depends(get_db)):
     """
     Allows a user to submit a contribution to the story during their turn.
     """
