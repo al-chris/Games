@@ -1,5 +1,6 @@
 # backend/main.py
 
+import os
 from fastapi import FastAPI, HTTPException, Depends, status, Request, Body, Query
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,6 +15,9 @@ from jose import JWTError, jwt
 from uuid import uuid4
 from datetime import datetime, timedelta
 from functools import wraps
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from database import SessionLocal, engine
 import models
@@ -23,9 +27,9 @@ import schemas
 models.Base.metadata.create_all(bind=engine)
 
 # Secret key for JWT
-SECRET_KEY = "your_secret_key_here"  # Replace with a secure key
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+SECRET_KEY = os.getenv("SECRET_KEY")  # Replace with a secure key
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60)
 
 # Initialize FastAPI app
 app = FastAPI()
