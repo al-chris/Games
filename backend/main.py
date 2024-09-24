@@ -29,7 +29,7 @@ models.Base.metadata.create_all(bind=engine)
 # Secret key for JWT
 SECRET_KEY = os.getenv("SECRET_KEY")  # Replace with a secure key
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60)
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
 
 # Initialize FastAPI app
 app = FastAPI()
