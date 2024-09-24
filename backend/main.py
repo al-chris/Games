@@ -34,11 +34,14 @@ ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60)
 # Initialize FastAPI app
 app = FastAPI()
 
-# Configure CORS (adjust origins as needed)
-origins = [
-    "http://localhost:3000",  # React frontend
-    "http://localhost:8000",  # FastAPI backend (if needed)
-]
+# Retrieve CORS allowed origins from environment variable
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "")
+if CORS_ALLOWED_ORIGINS:
+    # Split the string into a list, stripping any extra whitespace
+    origins = [origin.strip() for origin in CORS_ALLOWED_ORIGINS.split(",")]
+else:
+    origins = []
+
 
 app.add_middleware(
     CORSMiddleware,
